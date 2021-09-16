@@ -127,14 +127,17 @@ while True:
     elif event == "Go!":
         pokemon = values[1]
         k = values[2]
-        paletteImg, XML = getColours(pokemon, k)
-        window["tableauXML"].update(XML)
-        newPokemonImg = Image.open("pokemon_images/" + pokemon + ".png")
-        b = io.BytesIO()
-        newPokemonImg.save(b, "png")
-        newPokemonImgB = b.getvalue()
-        window["pokeImage"].update(newPokemonImgB)
-        window["paletteImage"].update(paletteImg)
+        if pokemon in available_pokemon:
+            paletteImg, XML = getColours(pokemon, k)
+            window["tableauXML"].update(XML)
+            newPokemonImg = Image.open("pokemon_images/" + pokemon + ".png")
+            b = io.BytesIO()
+            newPokemonImg.save(b, "png")
+            newPokemonImgB = b.getvalue()
+            window["pokeImage"].update(newPokemonImgB)
+            window["paletteImage"].update(paletteImg)
+        else:
+            pass
     elif event == "Copy to clipboard":
         pyperclip.copy(XML)
     
